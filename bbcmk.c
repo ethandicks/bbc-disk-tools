@@ -9,13 +9,8 @@ int verbose, noglob, inter;
 void syntax(command)
 char *command;
 {
-   printf("Syntax: %s -f <bbcimage> <bbcfile> [<bbcfile>...] <outfile>\n", \
+   printf("Syntax: %s <bbcimage> <bbcfile> [<bbcfile>...] <outfile>\n", \
       command);
-   printf("Flags are:\n");
-   printf("\t-h|-?      - this message\n");
-   printf("\t-i         - interactive - prompt on filename\n");
-   printf("\t-n         - noglob\n");
-   printf("\t-v         - verboseg\n");
    exit(0);
 }
 
@@ -31,6 +26,8 @@ char *instring;
    return instring;
 }
 
+/* Parsed arguments appear not to have been implemented in the original code. */
+#if 0
 int parse_arguments(argc,argv)
 int argc;
 char *argv[];
@@ -91,6 +88,7 @@ char *argv[];
  
    return carg;
 }
+#endif
  
 int main( argc, argv)
 int argc;
@@ -105,6 +103,10 @@ char **argv;
    unsigned char dirname;
    int size,files;
    int sector=2;
+
+   if (argc < 3) {
+      syntax(argv[0]); /* exits */
+   }
 
    strncpy( infile, argv[1], 255);
    next=2;
