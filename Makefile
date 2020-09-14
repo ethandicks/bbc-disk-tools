@@ -1,17 +1,25 @@
 CC=gcc
+CFLAGS=
 
-OBJECTS=bbc.o bbcls.o bbccp.o bbcmk.o
+PROGRAMS=bbcls bbccp bbcmk
 
-*.o:	$(OBJECTS)
+DEPS=common.h
+LIBRARY=bbc.o
 
-bbcls:	$(OBJECTS)
+all:	$(PROGRAMS)
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+bbcls:	bbcls.o $(LIBRARY) 
 	$(CC) -o bbcls bbcls.o bbc.o
 
-bbccp:	$(OBJECTS)
+bbccp:	bbccp.o $(LIBRARY)
 	$(CC) -o bbccp bbccp.o bbc.o
 
-bbcmk:	$(OBJECTS)
+bbcmk:	bbcmk.o $(LIBRARY)
 	$(CC) -o bbcmk bbcmk.o bbc.o
 
-all:	$(OBJECTS) bbcls bbccp bbcmk
+clean:
+	rm -f *.o $(PROGRAMS)
 
