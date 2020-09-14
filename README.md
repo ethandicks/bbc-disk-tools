@@ -34,6 +34,11 @@ Usage:
 
    bbcmk <outfile> <filelist>
 
+   Note 1: outfile is a new disk image to be constructed and will contain
+   all of the files in <filelist>
+   Note 2: files to be placed in the disk image must be .inf files (file
+   data plus load, save, and run addresses and file permission bits).
+
 To Make
 -------
 Type make all
